@@ -1,0 +1,4 @@
+baseURL = 'https://www.williamlong.info/'
+locale = 'zh-CN'
+title = '月光博客'
+theme = "PaperMod"
