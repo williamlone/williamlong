@@ -1,0 +1,21 @@
+{{- $ctx := partial "ctx.html" . -}}
+{{- $cfg := $ctx.cfg -}}
+{{- $home := cond (eq $ctx.sec "") "/" (printf "/%s/" $ctx.sec) -}}
+<div id="header" class="clearfix">
+  <div id="logo">
+    <h2><a href="{{ $home | relURL }}" title="{{ $cfg.title }}" rel="home bookmark">{{ $cfg.title }}</a></h2>
+  </div>
+</div>
+<label for="menu-toggle" class="navbar-toggle collapsed">
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</label>
+<div id="navigation" class="clearfix">
+  <input type="checkbox" id="menu-toggle" class="hidden"/>
+  <ul class="sf-menu navbar-nav">
+    {{- range $cfg.nav }}
+    <li><a href="{{ .url | relURL }}" title="{{ .name }}">{{ .name }}</a></li>
+    {{- end }}
+  </ul>
+</div>

@@ -1,0 +1,16 @@
+{{- $p := .Paginator -}}
+{{- if gt $p.TotalPages 1 }}
+<div class="pagination clearfix">
+  <a class="page-numbers" href="{{ $p.First.URL }}"><span class="page first-page">&laquo;</span></a>
+  {{- range $p.Pagers }}
+    {{- if eq .PageNumber $p.PageNumber }}
+    <span class="page now-page">{{ .PageNumber }}</span>
+    {{- else if and (or (le .PageNumber 6) (ge .PageNumber (sub $p.TotalPages 2))) }}
+    <a class="page-numbers" href="{{ .URL }}"><span class="page">{{ .PageNumber }}</span></a>
+    {{- else if and (ge .PageNumber (sub $p.PageNumber 3)) (le .PageNumber (add $p.PageNumber 3)) }}
+    <a class="page-numbers" href="{{ .URL }}"><span class="page">{{ .PageNumber }}</span></a>
+    {{- end }}
+  {{- end }}
+  <a class="page-numbers" href="{{ $p.Last.URL }}"><span class="page last-page">&raquo;</span></a>
+</div>
+{{- end }}

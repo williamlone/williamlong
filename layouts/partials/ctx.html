@@ -1,0 +1,25 @@
+{{- $sec := "" -}}
+{{- $plural := "" -}}
+{{- if or (eq .Kind "term") (eq .Kind "taxonomy") -}}
+  {{- $plural = .Data.Plural -}}
+{{- else -}}
+  {{- with .Section -}}{{- $sec = . -}}{{- end -}}
+{{- end -}}
+{{- if $plural -}}
+  {{- if eq $plural "categories" -}}
+  {{- else if eq $plural "tags" -}}
+  {{- else -}}
+    {{- $sec = index (split $plural "_") 0 -}}
+  {{- end -}}
+{{- end -}}
+{{- if eq $sec "archives" -}}{{- $sec = "" -}}{{- end -}}
+{{- $catKey := "categories" -}}
+{{- $tagKey := "tags" -}}
+{{- if $sec -}}
+  {{- $catKey = printf "%s_categories" $sec -}}
+  {{- $tagKey = printf "%s_tags" $sec -}}
+{{- end -}}
+{{- $cfgKey := cond (eq $sec "") "main" $sec -}}
+{{- $cfg := index hugo.Data.site $cfgKey -}}
+{{- $isCat := or (eq $plural "categories") (and $plural (not (eq $plural "tags"))) -}}
+{{- return (dict "sec" $sec "plural" $plural "catKey" $catKey "tagKey" $tagKey "cfg" $cfg "prefix" (cond (eq $sec "") "" (printf "/%s" $sec)) "taxCat" $catKey "taxTag" $tagKey "isArchives" (and (eq .Kind "section") (strings.HasSuffix .RelPermalink "archives/"))) -}}

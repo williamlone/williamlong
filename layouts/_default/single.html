@@ -1,0 +1,70 @@
+{{ define "main" }}
+{{- $ctx := partial "ctx.html" . -}}
+{{- $cfg := $ctx.cfg -}}
+{{- $catmap := index hugo.Data.taxonomy $ctx.catKey -}}
+{{- $tagmap := index hugo.Data.taxonomy $ctx.taxTag -}}
+{{- $cat := "" }}
+{{- with index .Params $ctx.catKey }}{{ $cat = index . 0 }}{{ end }}
+{{- $catHref := "" }}
+{{- with $cat }}
+  {{- $cslug := index $catmap . }}
+  {{- $catHref = printf "/cat/%s.html" $cslug }}
+  {{- if $ctx.sec }}{{ $catHref = printf "/%s/cat/%s.html" $ctx.sec $cslug }}{{ end }}
+{{- end }}
+<div class="entry clearfix breadcrumbs">
+  <a href="{{ cond (eq $ctx.sec "") "/" (printf "/%s/" $ctx.sec) | relURL }}">{{ $cfg.title }}</a> &raquo;
+  {{- with $catHref }}
+  <a href="{{ . | relURL }}" title="查看 {{ $cat }} 中的全部文章">{{ $cat }}</a> &raquo;
+  {{- end }}
+  <span>{{ .Title }}</span>
+</div>
+<div class="entry clearfix">
+  <h1><a class="post-title" href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a></h1>
+  <div class="post-meta">
+    {{ .Date.Format "2006-01-02 15:04:05" }} |
+    作者: {{ .Params.author | default site.Params.author }} |
+    {{- with $catHref }}
+    分类: <a href="{{ . | relURL }}" title="{{ $cat }}" rel="category tag">{{ $cat }}</a>
+    {{- end }}
+  </div>
+  <div class="clear"></div>
+  <div class="entry-content">
+    {{- with index .Params $ctx.tagKey }}
+      {{- $t := index . 0 }}
+      {{- $tslug := index $tagmap $t }}
+      {{- $logo := index hugo.Data.logos (lower $tslug) }}
+      {{- if $logo }}
+    <a href="{{ cond (eq $ctx.sec "") (printf "/tag/%s.html" $tslug) (printf "/%s/tag/%s.html" $ctx.sec $tslug) | relURL }}" rel="tag"><img src="{{ printf "/logo/%s" $logo | relURL }}" alt="{{ $t }}" class="thumb" width="80" height="80" /></a>
+      {{- end }}
+    {{- end }}
+{{ .Content }}
+  </div>
+</div>
+<div class="entry clearfix authorinfo">
+  <nav class="nextprevious clearfix">
+    {{- with .PrevInSection }}
+    <div class="previous_content">&laquo; 上一篇 <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a></div>
+    {{- end }}
+    {{- with .NextInSection }}
+    <div class="next_content">下一篇 <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a> &raquo;</div>
+    {{- end }}
+  </nav>
+  <div class="clear"></div>
+</div>
+{{- with $cat }}
+  {{- with index site.Taxonomies $ctx.catKey $cat }}
+<div class="entry clearfix">
+  <h4 id="mutualitybox">相关文章</h4>
+  <ul class="divComments">
+    <li class="msgarticle">
+      {{- range first 12 .Pages }}
+        {{- if ne .Permalink $.Permalink }}
+      <p class="mutualitylist"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>
+        {{- end }}
+      {{- end }}
+    </li>
+  </ul>
+</div>
+  {{- end }}
+{{- end }}
+{{ end }}

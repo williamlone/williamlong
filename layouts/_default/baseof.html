@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body class="{{ if .IsPage }}single single-post{{ else }}home blog{{ end }}">
+<div id="wrap" class="container clearfix">
+  <div class="header_wrap">
+{{ partial "header.html" . }}
+  </div>
+  <div id="main" class="container">
+    <div class="content alpha">
+{{ block "main" . }}{{ end }}
+    </div>
+{{ partial "sidebar.html" . }}
+  </div>
+</div>
+{{ partial "footer.html" . }}
+</body>
+</html>

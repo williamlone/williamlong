@@ -1,0 +1,25 @@
+{{- $ctx := partial "ctx.html" . -}}
+{{- $cfg := $ctx.cfg -}}
+{{- $title := site.Title -}}
+{{- if .IsHome -}}
+  {{- $title = printf "%s-关注互联网和搜索引擎的IT科技博客" site.Title -}}
+{{- else if .IsPage -}}
+  {{- $title = printf "%s-%s" .Title $cfg.title -}}
+{{- else -}}
+  {{- $title = printf "%s-%s" .Title (or .Description $cfg.title) -}}
+{{- end -}}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ $title }}</title>
+{{- $desc := .Description | default site.Params.description }}
+<meta name="description" content="{{ $desc }}">
+<meta name="keywords" content="{{ .Params.keywords | default site.Params.keywords }}">
+<meta name="author" content="{{ site.Params.author }}">
+<link rel="canonical" href="{{ .Permalink }}">
+{{- with .OutputFormats.Get "rss" }}
+<link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{- end }}
+<link rel="icon" href="{{ "images/favicon.ico" | relURL }}">
+<link rel="apple-touch-icon" href="{{ "images/apple-touch-icon.png" | relURL }}">
+<link rel="stylesheet" href="{{ "theme/style.css" | relURL }}">
+<meta name="generator" content="Hugo">

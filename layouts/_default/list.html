@@ -1,0 +1,106 @@
+{{ define "main" }}
+{{- $ctx := partial "ctx.html" . -}}
+{{- $cfg := $ctx.cfg -}}
+{{- if $ctx.isArchives }}
+  {{- $catmap := index hugo.Data.taxonomy $ctx.catKey -}}
+  {{- $tagmap := index hugo.Data.taxonomy $ctx.taxTag -}}
+  {{- $catTax := index site.Taxonomies $ctx.catKey -}}
+  {{- $tagTax := index site.Taxonomies $ctx.taxTag -}}
+  {{- $order := index hugo.Data.catorder $ctx.catKey -}}
+  <div class="entry clearfix">
+    <h1><a class="post-title" href="{{ .RelPermalink }}">{{ .Title }}</a></h1>
+    <div class="clear"></div>
+    <div class="entry-content">
+      {{- if not $ctx.sec }}
+      <h4>子栏目分类</h4>
+      <ul class="divCatalog">
+        {{- range $key, $item := hugo.Data.site }}
+          {{- if ne $key "main" }}
+        <li class="li-cate"><a href="{{ printf "/%s/" $key | relURL }}">{{ $item.title }}</a></li>
+          {{- end }}
+        {{- end }}
+      </ul>
+      {{- end }}
+      <h4>网站分类</h4>
+      <ul class="divCatalog">
+        {{- range $term := $order }}
+          {{- $slug := index $catmap $term }}
+          {{- $count := 0 }}{{ with index $catTax $term }}{{ $count = .Count }}{{ end }}
+          {{- $href := printf "/cat/%s.html" $slug }}
+          {{- if $ctx.sec }}{{ $href = printf "/%s/cat/%s.html" $ctx.sec $slug }}{{ end }}
+        <li class="li-cate"><a href="{{ $href | relURL }}">{{ $term }}<span class="article-nums"> ({{ $count }})</span></a></li>
+        {{- end }}
+      </ul>
+      <h4>标签云</h4>
+      <div class="tags-cloud">
+        {{- range $term, $slug := $tagmap }}
+          {{- $count := 0 }}{{ with index $tagTax $term }}{{ $count = .Count }}{{ end }}
+          {{- $href := printf "/tag/%s.html" $slug }}
+          {{- if $ctx.sec }}{{ $href = printf "/%s/tag/%s.html" $ctx.sec $slug }}{{ end }}
+        <a href="{{ $href | relURL }}" rel="tag">{{ $term }}<span class="article-nums"> ({{ $count }})</span></a>
+        {{- end }}
+      </div>
+    </div>
+  </div>
+{{- else }}
+  {{- $pages := .RegularPages -}}
+  {{- if .IsHome }}{{ $pages = where site.RegularPages "Section" "" }}{{ end -}}
+  {{- if eq .Kind "term" }}{{ $pages = .Pages }}{{ end -}}
+  {{- $pages = $pages.ByDate.Reverse -}}
+  {{- $catmap := index hugo.Data.taxonomy $ctx.catKey -}}
+  {{- $tagmap := index hugo.Data.taxonomy $ctx.taxTag -}}
+  {{- if and (not .IsHome) (ne .Kind "section") }}
+  <div class="entry clearfix breadcrumbs">
+    <a href="{{ cond (eq $ctx.sec "") "/" (printf "/%s/" $ctx.sec) | relURL }}">{{ $cfg.title }}</a> &raquo;
+    <span>{{ .Title }}</span>
+  </div>
+  {{- end }}
+  {{- if eq (len $pages) 0 }}
+  <div class="entry clearfix">
+    <div class="entry-content">暂无内容。</div>
+  </div>
+  {{- else if eq .Kind "term" }}
+  <div class="entry clearfix">
+    <div class="entry-content">
+      <ul class="divCatalog">
+        {{- range $pages }}
+        <li><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a><span class="article-nums"> ({{ .Date.Format "2006-01-02" }})</span></li>
+        {{- end }}
+      </ul>
+    </div>
+  </div>
+  {{- else }}
+  {{- $paginator := .Paginate $pages }}
+  {{- range $paginator.Pages }}
+  <div class="entry clearfix">
+    <h1><a class="post-title" href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a></h1>
+    <div class="post-meta">
+      {{ .Date.Format "2006年1月2日" }} |
+      作者: {{ .Params.author | default site.Params.author }} |
+      {{- with index .Params $ctx.catKey }}
+      {{- $c := index . 0 }}
+      {{- $cslug := index $catmap $c }}
+      分类: <a href="{{ cond (eq $ctx.sec "") (printf "/cat/%s.html" $cslug) (printf "/%s/cat/%s.html" $ctx.sec $cslug) | relURL }}" title="{{ $c }}" rel="category tag">{{ $c }}</a>
+      {{- end }}
+    </div>
+    <div class="clear"></div>
+    <div class="entry-content">
+      {{- with index .Params $ctx.tagKey }}
+        {{- $t := index . 0 }}
+        {{- $tslug := index $tagmap $t }}
+        {{- $logo := index hugo.Data.logos (lower $tslug) }}
+        {{- if $logo }}
+      <a href="{{ cond (eq $ctx.sec "") (printf "/tag/%s.html" $tslug) (printf "/%s/tag/%s.html" $ctx.sec $tslug) | relURL }}" rel="tag"><img src="{{ printf "/logo/%s" $logo | relURL }}" alt="{{ $t }}" class="thumb" width="80" height="80" /></a>
+        {{- end }}
+      {{- end }}
+      {{- if .Summary }}{{ .Summary | plainify | strings.TrimSpace | truncate 220 }}{{ else }}{{ .Content | plainify | strings.TrimSpace | truncate 220 }}{{ end }}
+      {{- if $ctx.sec }}
+      <a href="{{ .RelPermalink }}" class="more-link">阅读全文...</a>
+      {{- end }}
+    </div>
+  </div>
+  {{- end }}
+  {{ partial "pagination.html" . }}
+  {{- end }}
+{{- end }}
+{{ end }}
