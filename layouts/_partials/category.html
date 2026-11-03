@@ -1,8 +1,0 @@
-{{- with index .Params.categories 0 -}}
-{{- $name := . -}}
-{{- with site.GetPage (printf "/categories/%s" $name) -}}
-<a href="{{ .RelPermalink }}" title="{{ $name }}" rel="category tag">{{ $name }}</a>
-{{- else -}}
-{{ . }}
-{{- end -}}
-{{- end -}}

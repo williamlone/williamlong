@@ -1,4 +1,0 @@
-{{- $url := "" -}}
-{{- with site.GetPage (printf "/tags/%s" .) -}}{{- $url = .RelPermalink -}}{{- end -}}
-{{- if not $url -}}{{- $url = printf "/tag/%s.html" . -}}{{- end -}}
-{{- $url -}}
