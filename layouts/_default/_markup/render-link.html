@@ -1,0 +1,6 @@
+{{- $cdn := site.Params.image_cdn | default "" -}}
+{{- $dest := .Destination -}}
+{{- if and $cdn $dest (hasPrefix $dest "/upload/") -}}
+  {{- $dest = printf "%s/%s" (strings.TrimSuffix "/" $cdn) (strings.TrimPrefix "/" $dest) -}}
+{{- end -}}
+<a href="{{ $dest | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text | safeHTML }}</a>

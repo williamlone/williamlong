@@ -1,0 +1,9 @@
+{{- $cdn := site.Params.image_cdn | default "" -}}
+{{- $src := .Destination -}}
+{{- if and $cdn $src -}}
+  {{- $u := urls.Parse $src -}}
+  {{- if and (not $u.Scheme) (not (hasPrefix $src "//")) -}}
+    {{- $src = printf "%s/%s" (strings.TrimSuffix "/" $cdn) (strings.TrimPrefix "/" $src) -}}
+  {{- end -}}
+{{- end -}}
+<img src="{{ $src | safeURL }}" alt="{{ .PlainText }}"{{ with .Title }} title="{{ . }}"{{ end }} />
