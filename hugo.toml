@@ -72,7 +72,7 @@ disablePathToLower = true
     target = 'content/weibo_tags'
 
 [pagination]
-  pagerSize = 30
+  pagerSize = 50
   path = 'page'
 
 [params]
@@ -89,7 +89,7 @@ disablePathToLower = true
 [outputs]
   home = ["HTML", "RSS"]
   section = ["HTML", "RSS"]
-  taxonomy = ["HTML"]
+  taxonomy = []
   term = ["HTML"]
 
 [outputFormats.RSS]
