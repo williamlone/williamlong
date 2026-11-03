@@ -1,0 +1,20 @@
+<div class="header_wrap">
+	<div id="header" class="clearfix">
+		<div id="logo">
+			<h2><a href="/" title="月光博客" rel="home bookmark">月光博客</a></h2>
+		</div><!-- END logo -->
+	</div><!-- END header -->
+	<label for="menu-toggle" class="navbar-toggle collapsed">
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+		<span class="icon-bar"></span>
+	</label>
+	<div id="navigation" class="clearfix">
+		<input type="checkbox" id="menu-toggle" class="hidden"/>
+		<ul class="sf-menu navbar-nav">
+			{{- range site.Data.navigation }}
+			<li><a href="{{ .url }}" title="{{ .title }}"{{ if .blank }} target="_blank"{{ end }}>{{ .name }}</a></li>
+			{{- end }}
+		</ul>
+	</div><!-- END navigation -->
+</div>

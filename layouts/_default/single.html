@@ -1,0 +1,58 @@
+{{ define "main" }}
+{{- $posts := where site.RegularPages "Type" "page" -}}
+{{- $sorted := $posts.ByDate -}}
+{{- $prev := false -}}
+{{- $next := false -}}
+{{- range $i, $p := $sorted -}}
+	{{- if eq $p.RelPermalink $.RelPermalink -}}
+		{{- if gt $i 0 -}}{{- $prev = index $sorted (sub $i 1) -}}{{- end -}}
+		{{- if lt (add $i 1) (len $sorted) -}}{{- $next = index $sorted (add $i 1) -}}{{- end -}}
+	{{- end -}}
+{{- end }}
+<div id="breadcrumbs" class="breadcrumbs">
+	<a href="/">月光博客</a> &raquo; {{ partial "category.html" . }} &raquo; <span>{{ .Title }}</span>
+</div>
+<div class="entry clearfix">
+	<h1><a class="post-title" href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a></h1>
+	<div class="post-meta">
+		{{ .Date.Format "2006-01-02 15:4:5" }} | 
+		作者: {{ site.Params.author }} | 
+		分类: {{ partial "category.html" . }} | 
+		评论: 0 | 
+		浏览: 0
+	</div><!-- END post-meta -->
+	<div class="clear"></div>
+	<div class="entry-content">
+		{{ partial "tagthumb.html" . }}{{ .Content }}
+	</div>
+</div><!-- END entry -->
+<div class="entry clearfix authorinfo">
+	<nav class="nextprevious">
+		{{- with $prev }}
+		<div class="previous_content">« 上一篇 <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a></div>
+		{{- end }}
+		{{- with $next }}
+		<div class="next_content">下一篇 » <a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a></div>
+		{{- end }}
+	</nav>
+	<div class="clear"></div>
+</div>
+{{- with index .Params.tags 0 }}
+{{- $tag := . }}
+{{- $self := $.RelPermalink }}
+{{- $n := 0 }}
+<div class="entry clearfix">
+	<h4 id="mutualitybox">相关文章</h4>
+	<ul class="divComments">
+		{{- range $posts }}
+		{{- if and (ne .RelPermalink $self) (in .Params.tags $tag) }}
+		{{- if lt $n 8 }}
+		<li class="msgarticle"><p class="mutualitylist"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p></li>
+		{{- $n = add $n 1 }}
+		{{- end }}
+		{{- end }}
+		{{- end }}
+	</ul>
+</div>
+{{- end }}
+{{ end }}

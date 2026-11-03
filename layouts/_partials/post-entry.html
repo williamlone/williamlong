@@ -1,0 +1,16 @@
+<div class="entry clearfix">
+	<h1><a class="post-title" href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a></h1>
+	<div class="post-meta">
+		{{ .Date.Format "2006年1月2日" }} | 
+		作者: {{ site.Params.author }} | 
+		分类: {{ partial "category.html" . }} | 
+		评论: 0 | 
+		浏览: 0
+	</div>
+
+	<div class="clear"></div>
+	<div class="entry-content">
+		{{ partial "tagthumb.html" . }}{{ .Summary | plainify | htmlUnescape }}
+	</div>
+	<!-- END post-bottom -->
+</div><!-- END entry -->

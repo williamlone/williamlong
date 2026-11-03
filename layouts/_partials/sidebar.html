@@ -1,0 +1,79 @@
+{{- $posts := where site.RegularPages "Type" "page" -}}
+<div id="sidebar" class="sidebar alpha omega">
+	<div class="sidebar-box clearfix">
+		<h4>订阅博客</h4>
+		<ul class="divSubscribe">
+			<ul>
+				<li>订阅我的博客：<a href="/rss.xml" target="_blank" rel="nofollow"><img style="border: medium none ; vertical-align:middle;" src="/images/sub_rss.gif" alt="订阅我的博客" /></a></li>
+				<li>邮件订阅博客：<a href="https://follow.it/83wyvz?action=followPub" target="_blank" rel="nofollow"><img style="border: medium none ; vertical-align:middle;" src="/images/sub_mail.gif" alt="邮件订阅博客" /></a></li>
+				<img src="/images/qrcode.gif" alt="月光博客" />
+			</ul>
+		</ul>
+	</div>
+	<div class="sidebar-box clearfix">
+		<h4>搜索</h4>
+		<ul class="divSearchPanel">
+			<div><form method="get" action="https://www.google.com/search"><input type="text" name="q" id="edtSearch" size="12" /><input type="submit" value="提交" name="btnG" id="btnPost" /><input type="hidden" name="ie" value="UTF-8" /><input type="hidden" name="oe" value="UTF-8" /><input type="hidden" name="hl" value="zh-CN" /><input type="hidden" name="domains" value="www.williamlong.info" /><input type="hidden" name="sitesearch" value="www.williamlong.info" /></form></div>
+		</ul>
+	</div>
+	<div class="sidebar-box clearfix">
+		<h4>网站分类</h4>
+		<ul class="divCatalog">
+			<ul>
+				{{- range $i, $cat := site.Data.categories }}
+				{{- $count := 0 -}}
+				{{- with index site.Taxonomies.categories $cat.name -}}{{- $count = .Count -}}{{- end }}
+				<li class="li-cate cate-{{ add $i 1 }}"><a href="/cat/{{ $cat.slug }}.html">{{ $cat.name }}<span class="article-nums"> ({{ $count }})</span></a></li>
+				{{- end }}
+			</ul>
+		</ul>
+	</div>
+	<div class="sidebar-box clearfix">
+		<h4>网站收藏</h4>
+		<ul class="divFavorites">
+			<ul>
+				<li><a href="https://www.williamlong.info/" target="_blank">月光博客</a></li>
+				<li><a href="https://www.williamlong.info/weibo/" target="_blank">月光微博客</a></li>
+				<li><a href="https://www.williamlong.info/google/" target="_blank">谷歌地图观察</a></li>
+				<li><a href="https://www.williamlong.info/apps/" target="_blank">移动应用观察</a></li>
+				<li><a href="https://www.williamlong.info/info/" target="_blank">网站运营优化</a></li>
+				<li><a href="https://www.williamlong.info/movie/" target="_blank">电影评论</a></li>
+				<li><a href="https://www.williamlong.info/story/" target="_blank">故事文摘</a></li>
+				<li><a href="https://www.williamlong.info/book/" target="_blank">短篇小说</a></li>
+			</ul>
+		</ul>
+	</div>
+	<div class="sidebar-box clearfix">
+		<h4>热文排行</h4>
+		<ul class="article_hottest">
+			<ul>
+				{{- range first 10 $posts.ByDate.Reverse }}
+				<li><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title | truncate 20 }}(0)</a></li>
+				{{- end }}
+			</ul>
+		</ul>
+	</div>
+	<div class="sidebar-box clearfix">
+		<h4>推荐博客</h4>
+		<ul class="divLinkage">
+			<ul></ul>
+		</ul>
+	</div>
+	<div class="sidebar-box clearfix">
+		<h4>站点统计</h4>
+		<ul class="divStatistics">
+			<ul>
+				<li>文章总数:{{ len $posts }}</li>
+				<li>评论总数:0</li>
+				<li>浏览总数:0</li>
+				<li>当前主题:SimplePro</li>
+			</ul>
+		</ul>
+	</div>
+	<div class="sidebar-box clearfix">
+		<h4>控制面板</h4>
+		<ul class="divContorPanel">
+			<div><span class="cp-hello">您好,欢迎到访网站!</span><br/><span class="cp-login"><a href="https://www.williamlong.info/zb_system/cmd.asp?act=login">[用户登录]</a></span>&nbsp;&nbsp;<span class="cp-vrs"><a href="https://www.williamlong.info/zb_system/cmd.asp?act=vrs">[查看权限]</a></span></div>
+		</ul>
+	</div>
+</div><!-- END sidebar -->

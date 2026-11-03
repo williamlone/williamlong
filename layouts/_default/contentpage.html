@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div id="breadcrumbs" class="breadcrumbs">
+	<a href="/">月光博客</a> &raquo; <span>{{ .Title }}</span>
+</div>
+<div class="entry clearfix">
+	<h1><a class="post-title" href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a></h1>
+	<div class="clear"></div>
+	<div class="entry-content">
+		{{ .Content }}
+	</div>
+</div><!-- END entry -->
+{{ end }}

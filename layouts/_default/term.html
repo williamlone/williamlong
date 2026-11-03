@@ -1,0 +1,7 @@
+{{ define "main" }}
+{{- $paginator := .Paginate .Pages -}}
+{{- range $paginator.Pages }}
+{{ partial "post-entry.html" . }}
+{{- end }}
+{{ partial "pagination.html" . }}
+{{ end }}

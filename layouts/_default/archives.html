@@ -1,0 +1,28 @@
+{{ define "main" }}
+{{- $posts := where site.RegularPages "Type" "page" }}
+<div class="entry clearfix">
+	<h1><a class="post-title" href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a></h1>
+	<div class="clear"></div>
+	<div class="entry-content">
+		<div class="tags-cloud">
+			<h2 class="post-title"><a href="/archives/">子栏目分类</a></h2>
+			<div class="post-body"><p><blockquote>
+				<a href="https://www.williamlong.info/weibo/" title="月光微博客" class="tag-name">月光微博客</a>&nbsp;&nbsp;
+				<a href="https://www.williamlong.info/google/" title="谷歌地图观察" class="tag-name">谷歌地图观察</a>&nbsp;&nbsp;
+				<a href="https://www.williamlong.info/info/" title="网站运营优化" class="tag-name">网站运营优化</a>&nbsp;&nbsp;
+				<a href="https://www.williamlong.info/apps/" title="移动应用观察" class="tag-name">移动观察</a>&nbsp;&nbsp;
+				<a href="https://www.williamlong.info/story/" title="故事文摘" class="tag-name">故事文摘</a>&nbsp;&nbsp;
+				<a href="https://www.williamlong.info/book/" title="短篇小说" class="tag-name">短篇小说</a>&nbsp;&nbsp;
+				<a href="https://www.williamlong.info/anni/" title="安妮宝贝" class="tag-name">安妮宝贝</a>&nbsp;&nbsp;
+			</blockquote></p></div>
+			{{- range site.Data.categories }}
+			{{- $name := .name }}
+			{{- $count := 0 }}
+			{{- with index site.Taxonomies.categories $name }}{{ $count = .Count }}{{ end }}
+			<h2 class="post-title"><a href="/cat/{{ .slug }}.html">{{ .name }}</a></h2>
+			<div class="post-body"><p><blockquote>{{ $count }} 篇文章</blockquote></p></div>
+			{{- end }}
+		</div>
+	</div>
+</div><!-- END entry -->
+{{ end }}
