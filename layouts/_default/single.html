@@ -8,8 +8,8 @@
 {{- $catHref := "" }}
 {{- with $cat }}
   {{- $cslug := index $catmap . }}
-  {{- $catHref = printf "/cat/%s.html" $cslug }}
-  {{- if $ctx.sec }}{{ $catHref = printf "/%s/cat/%s.html" $ctx.sec $cslug }}{{ end }}
+  {{- $catHref = printf "/cat/%s/" $cslug }}
+  {{- if $ctx.sec }}{{ $catHref = printf "/%s/cat/%s/" $ctx.sec $cslug }}{{ end }}
 {{- end }}
 <div class="entry clearfix breadcrumbs">
   <a href="{{ cond (eq $ctx.sec "") "/" (printf "/%s/" $ctx.sec) | relURL }}">{{ $cfg.title }}</a> &raquo;
@@ -34,7 +34,7 @@
       {{- $tslug := index $tagmap $t }}
       {{- $logo := index hugo.Data.logos (lower $tslug) }}
       {{- if $logo }}
-    <a href="{{ cond (eq $ctx.sec "") (printf "/tag/%s.html" $tslug) (printf "/%s/tag/%s.html" $ctx.sec $tslug) | relURL }}" rel="tag"><img src="{{ printf "/logo/%s" $logo | relURL }}" alt="{{ $t }}" class="thumb" width="80" height="80" /></a>
+    <a href="{{ cond (eq $ctx.sec "") (printf "/tag/%s/" $tslug) (printf "/%s/tag/%s/" $ctx.sec $tslug) | relURL }}" rel="tag"><img src="{{ printf "/logo/%s" $logo | relURL }}" alt="{{ $t }}" class="thumb" width="80" height="80" /></a>
       {{- end }}
     {{- end }}
 {{ .Content }}

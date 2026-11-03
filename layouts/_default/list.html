@@ -26,8 +26,8 @@
         {{- range $term := $order }}
           {{- $slug := index $catmap $term }}
           {{- $count := 0 }}{{ with index $catTax $term }}{{ $count = .Count }}{{ end }}
-          {{- $href := printf "/cat/%s.html" $slug }}
-          {{- if $ctx.sec }}{{ $href = printf "/%s/cat/%s.html" $ctx.sec $slug }}{{ end }}
+          {{- $href := printf "/cat/%s/" $slug }}
+          {{- if $ctx.sec }}{{ $href = printf "/%s/cat/%s/" $ctx.sec $slug }}{{ end }}
         <li class="li-cate"><a href="{{ $href | relURL }}">{{ $term }}<span class="article-nums"> ({{ $count }})</span></a></li>
         {{- end }}
       </ul>
@@ -35,8 +35,8 @@
       <div class="tags-cloud">
         {{- range $term, $slug := $tagmap }}
           {{- $count := 0 }}{{ with index $tagTax $term }}{{ $count = .Count }}{{ end }}
-          {{- $href := printf "/tag/%s.html" $slug }}
-          {{- if $ctx.sec }}{{ $href = printf "/%s/tag/%s.html" $ctx.sec $slug }}{{ end }}
+          {{- $href := printf "/tag/%s/" $slug }}
+          {{- if $ctx.sec }}{{ $href = printf "/%s/tag/%s/" $ctx.sec $slug }}{{ end }}
         <a href="{{ $href | relURL }}" rel="tag">{{ $term }}<span class="article-nums"> ({{ $count }})</span></a>
         {{- end }}
       </div>
@@ -59,16 +59,6 @@
   <div class="entry clearfix">
     <div class="entry-content">暂无内容。</div>
   </div>
-  {{- else if eq .Kind "term" }}
-  <div class="entry clearfix">
-    <div class="entry-content">
-      <ul class="divCatalog">
-        {{- range $pages }}
-        <li><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a><span class="article-nums"> ({{ .Date.Format "2006-01-02" }})</span></li>
-        {{- end }}
-      </ul>
-    </div>
-  </div>
   {{- else }}
   {{- $paginator := .Paginate $pages }}
   {{- range $paginator.Pages }}
@@ -80,7 +70,7 @@
       {{- with index .Params $ctx.catKey }}
       {{- $c := index . 0 }}
       {{- $cslug := index $catmap $c }}
-      分类: <a href="{{ cond (eq $ctx.sec "") (printf "/cat/%s.html" $cslug) (printf "/%s/cat/%s.html" $ctx.sec $cslug) | relURL }}" title="{{ $c }}" rel="category tag">{{ $c }}</a>
+      分类: <a href="{{ cond (eq $ctx.sec "") (printf "/cat/%s/" $cslug) (printf "/%s/cat/%s/" $ctx.sec $cslug) | relURL }}" title="{{ $c }}" rel="category tag">{{ $c }}</a>
       {{- end }}
     </div>
     <div class="clear"></div>
@@ -90,7 +80,7 @@
         {{- $tslug := index $tagmap $t }}
         {{- $logo := index hugo.Data.logos (lower $tslug) }}
         {{- if $logo }}
-      <a href="{{ cond (eq $ctx.sec "") (printf "/tag/%s.html" $tslug) (printf "/%s/tag/%s.html" $ctx.sec $tslug) | relURL }}" rel="tag"><img src="{{ printf "/logo/%s" $logo | relURL }}" alt="{{ $t }}" class="thumb" width="80" height="80" /></a>
+      <a href="{{ cond (eq $ctx.sec "") (printf "/tag/%s/" $tslug) (printf "/%s/tag/%s/" $ctx.sec $tslug) | relURL }}" rel="tag"><img src="{{ printf "/logo/%s" $logo | relURL }}" alt="{{ $t }}" class="thumb" width="80" height="80" /></a>
         {{- end }}
       {{- end }}
       {{- if .Summary }}{{ .Summary | plainify | strings.TrimSpace | truncate 220 }}{{ else }}{{ .Content | plainify | strings.TrimSpace | truncate 220 }}{{ end }}

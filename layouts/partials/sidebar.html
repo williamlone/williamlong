@@ -39,8 +39,8 @@
         {{- $slug := index $catmap $term }}
         {{- $count := 0 }}
         {{- with index $tax $term }}{{ $count = .Count }}{{ end }}
-        {{- $href := printf "/cat/%s.html" $slug }}
-        {{- if $ctx.sec }}{{ $href = printf "/%s/cat/%s.html" $ctx.sec $slug }}{{ end }}
+        {{- $href := printf "/cat/%s/" $slug }}
+        {{- if $ctx.sec }}{{ $href = printf "/%s/cat/%s/" $ctx.sec $slug }}{{ end }}
         <li class="li-cate cate-{{ add $i 1 }}"><a href="{{ $href | relURL }}">{{ $term }}<span class="article-nums"> ({{ $count }})</span></a></li>
         {{- end }}
       </ul>
