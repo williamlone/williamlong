@@ -4,13 +4,13 @@
     "nav": [
       {"name": "首页", "url": "/"},
       {"name": "推荐", "url": "/archives/2.html"},
-      {"name": "业界", "url": "/cat/tech/"},
-      {"name": "互联网", "url": "/cat/internet/"},
-      {"name": "软件", "url": "/cat/software/"},
-      {"name": "编程", "url": "/cat/program/"},
-      {"name": "建站", "url": "/cat/webmaster/"},
-      {"name": "引擎", "url": "/cat/seo/"},
-      {"name": "地图", "url": "/cat/map/"},
+      {"name": "业界", "url": "/cat/tech.html"},
+      {"name": "互联网", "url": "/cat/internet.html"},
+      {"name": "软件", "url": "/cat/software.html"},
+      {"name": "编程", "url": "/cat/program.html"},
+      {"name": "建站", "url": "/cat/webmaster.html"},
+      {"name": "引擎", "url": "/cat/seo.html"},
+      {"name": "地图", "url": "/cat/map.html"},
       {"name": "观察", "url": "/google/"},
       {"name": "微博", "url": "/weibo/"},
       {"name": "影评", "url": "/movie/"},
@@ -21,11 +21,11 @@
     "title": "月光微博客",
     "nav": [
       {"name": "首页", "url": "/weibo/"},
-      {"name": "新闻", "url": "/weibo/cat/news/"},
-      {"name": "评论", "url": "/weibo/cat/review/"},
-      {"name": "网络", "url": "/weibo/cat/blog/"},
-      {"name": "软件", "url": "/weibo/cat/software/"},
-      {"name": "生活", "url": "/weibo/cat/other/"},
+      {"name": "新闻", "url": "/weibo/cat/news.html"},
+      {"name": "评论", "url": "/weibo/cat/review.html"},
+      {"name": "网络", "url": "/weibo/cat/blog.html"},
+      {"name": "软件", "url": "/weibo/cat/software.html"},
+      {"name": "生活", "url": "/weibo/cat/other.html"},
       {"name": "更多", "url": "/weibo/archives/"}
     ]
   },
@@ -33,11 +33,11 @@
     "title": "谷歌地图观察",
     "nav": [
       {"name": "首页", "url": "/google/"},
-      {"name": "世界奇趣", "url": "/google/cat/fun/"},
-      {"name": "地标合集", "url": "/google/cat/collection/"},
-      {"name": "自然景观", "url": "/google/cat/nature/"},
-      {"name": "旅游交通", "url": "/google/cat/travel/"},
-      {"name": "人文历史", "url": "/google/cat/culture/"},
+      {"name": "世界奇趣", "url": "/google/cat/fun.html"},
+      {"name": "地标合集", "url": "/google/cat/collection.html"},
+      {"name": "自然景观", "url": "/google/cat/nature.html"},
+      {"name": "旅游交通", "url": "/google/cat/travel.html"},
+      {"name": "人文历史", "url": "/google/cat/culture.html"},
       {"name": "更多", "url": "/google/archives/"}
     ]
   },
@@ -45,15 +45,15 @@
     "title": "网站运营优化",
     "nav": [
       {"name": "首页", "url": "/info/"},
-      {"name": "动态", "url": "/info/cat/news/"},
-      {"name": "评论", "url": "/info/cat/review/"},
-      {"name": "策划", "url": "/info/cat/plan/"},
-      {"name": "设计", "url": "/info/cat/design/"},
-      {"name": "运营", "url": "/info/cat/service/"},
-      {"name": "SEO", "url": "/info/cat/seo/"},
-      {"name": "应用", "url": "/info/cat/application/"},
-      {"name": "服务器", "url": "/info/cat/server/"},
-      {"name": "编程", "url": "/info/cat/program/"},
+      {"name": "动态", "url": "/info/cat/news.html"},
+      {"name": "评论", "url": "/info/cat/review.html"},
+      {"name": "策划", "url": "/info/cat/plan.html"},
+      {"name": "设计", "url": "/info/cat/design.html"},
+      {"name": "运营", "url": "/info/cat/service.html"},
+      {"name": "SEO", "url": "/info/cat/seo.html"},
+      {"name": "应用", "url": "/info/cat/application.html"},
+      {"name": "服务器", "url": "/info/cat/server.html"},
+      {"name": "编程", "url": "/info/cat/program.html"},
       {"name": "更多", "url": "/info/archives/"}
     ]
   },
@@ -61,9 +61,9 @@
     "title": "移动应用观察",
     "nav": [
       {"name": "首页", "url": "/apps/"},
-      {"name": "iPhone", "url": "/apps/tag/iPhone/"},
-      {"name": "iPad", "url": "/apps/tag/iPad/"},
-      {"name": "Android", "url": "/apps/tag/Android/"},
+      {"name": "iPhone", "url": "/apps/tag/iPhone.html"},
+      {"name": "iPad", "url": "/apps/tag/iPad.html"},
+      {"name": "Android", "url": "/apps/tag/Android.html"},
       {"name": "更多", "url": "/apps/archives/"}
     ]
   },
@@ -71,7 +71,7 @@
     "title": "短篇小说",
     "nav": [
       {"name": "首页", "url": "/book/"},
-      {"name": "经典小说", "url": "/book/cat/classic/"},
+      {"name": "经典小说", "url": "/book/cat/classic.html"},
       {"name": "长篇小说", "url": "/xiaoshuo/"},
       {"name": "更多", "url": "/book/archives/"}
     ]
@@ -80,10 +80,10 @@
     "title": "电影评论",
     "nav": [
       {"name": "首页", "url": "/movie/"},
-      {"name": "欧美电影", "url": "/movie/cat/us/"},
-      {"name": "日韩电影", "url": "/movie/cat/jp/"},
-      {"name": "港台电影", "url": "/movie/cat/hk/"},
-      {"name": "大陆电影", "url": "/movie/cat/cn/"},
+      {"name": "欧美电影", "url": "/movie/cat/us.html"},
+      {"name": "日韩电影", "url": "/movie/cat/jp.html"},
+      {"name": "港台电影", "url": "/movie/cat/hk.html"},
+      {"name": "大陆电影", "url": "/movie/cat/cn.html"},
       {"name": "更多", "url": "/movie/archives/"}
     ]
   },
@@ -91,13 +91,13 @@
     "title": "故事文摘",
     "nav": [
       {"name": "首页", "url": "/story/"},
-      {"name": "爱情故事", "url": "/story/cat/love/"},
-      {"name": "情感故事", "url": "/story/cat/feeling/"},
-      {"name": "人生故事", "url": "/story/cat/life/"},
-      {"name": "幽默故事", "url": "/story/cat/joke/"},
-      {"name": "哲理故事", "url": "/story/cat/fable/"},
-      {"name": "科幻故事", "url": "/story/cat/mystery/"},
-      {"name": "鬼故事", "url": "/story/cat/ghost/"},
+      {"name": "爱情故事", "url": "/story/cat/love.html"},
+      {"name": "情感故事", "url": "/story/cat/feeling.html"},
+      {"name": "人生故事", "url": "/story/cat/life.html"},
+      {"name": "幽默故事", "url": "/story/cat/joke.html"},
+      {"name": "哲理故事", "url": "/story/cat/fable.html"},
+      {"name": "科幻故事", "url": "/story/cat/mystery.html"},
+      {"name": "鬼故事", "url": "/story/cat/ghost.html"},
       {"name": "更多", "url": "/story/archives/"}
     ]
   },
@@ -105,9 +105,9 @@
     "title": "安妮宝贝",
     "nav": [
       {"name": "首页", "url": "/anni/"},
-      {"name": "安妮宝贝的小说", "url": "/anni/cat/novel/"},
-      {"name": "安妮宝贝的随笔", "url": "/anni/cat/essay/"},
-      {"name": "安妮宝贝的诗歌", "url": "/anni/cat/poem/"},
+      {"name": "安妮宝贝的小说", "url": "/anni/cat/novel.html"},
+      {"name": "安妮宝贝的随笔", "url": "/anni/cat/essay.html"},
+      {"name": "安妮宝贝的诗歌", "url": "/anni/cat/poem.html"},
       {"name": "更多", "url": "/anni/archives/"}
     ]
   },
