@@ -1,0 +1,4 @@
+# Hugo 内容与构建产物，不纳入 Git 版本管理
+content/
+public/
+static/
