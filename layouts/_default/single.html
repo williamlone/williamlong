@@ -21,14 +21,22 @@
 <div class="entry clearfix">
   <h1><a class="post-title" href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a></h1>
   <div class="post-meta">
+    {{- if $ctx.sec }}
+    {{ .Date.Format "2006年1月2日" }} |
+    {{- else }}
     {{ .Date.Format "2006-01-02 15:04:05" }} |
     作者: {{ .Params.author | default site.Params.author }} |
+    {{- end }}
     {{- with $catHref }}
     分类: <a href="{{ . | relURL }}" title="{{ $cat }}" rel="category tag">{{ $cat }}</a>
+    {{- end }}
+    {{- if and (eq $ctx.sec "movie") (.Params.rating) }}
+    | 豆瓣评分: {{ .Params.rating }}
     {{- end }}
   </div>
   <div class="clear"></div>
   <div class="entry-content">
+    {{- if not $ctx.sec }}
     {{- with index .Params $ctx.tagKey }}
       {{- $t := index . 0 }}
       {{- $tslug := index $tagmap $t }}
@@ -37,7 +45,21 @@
     <a href="{{ cond (eq $ctx.sec "") (printf "/tag/%s.html" $tslug) (printf "/%s/tag/%s.html" $ctx.sec $tslug) | relURL }}" rel="tag"><img src="{{ printf "/logo/%s" $logo | relURL }}" alt="{{ $t }}" class="thumb" width="80" height="80" /></a>
       {{- end }}
     {{- end }}
+    {{- end }}
 {{ .Content }}
+    {{- if $ctx.sec }}
+    {{- with index .Params $ctx.tagKey }}
+    <div class="post-bottom">
+      <div class="post-tags-pig">
+        {{- range $t := . }}
+          {{- with index $tagmap $t }}
+        <a href="{{ printf "%s/tag/%s.html" $ctx.prefix . | relURL }}" rel="tag">{{ $t }}</a>
+          {{- end }}
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+    {{- end }}
   </div>
 </div>
 <div class="entry clearfix authorinfo">

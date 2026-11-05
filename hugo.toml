@@ -15,21 +15,25 @@ disablePathToLower = true
   google_category = 'google_categories'
   google_tag = 'google_tags'
   info_category = 'info_categories'
+  info_tag = 'info_tags'
+  apps_category = 'apps_categories'
   apps_tag = 'apps_tags'
-  book_category = 'book_categories'
   movie_category = 'movie_categories'
+  movie_tag = 'movie_tags'
 
 [permalinks.term]
-  categories = '/cat/:slug'
-  tags = '/tag/:slug'
-  weibo_categories = '/weibo/cat/:slug'
-  weibo_tags = '/weibo/tag/:slug'
-  google_categories = '/google/cat/:slug'
-  google_tags = '/google/tag/:slug'
-  info_categories = '/info/cat/:slug'
-  apps_tags = '/apps/tag/:slug'
-  book_categories = '/book/cat/:slug'
-  movie_categories = '/movie/cat/:slug'
+  categories = '/cat/:slug/'
+  tags = '/tag/:slug/'
+  weibo_categories = '/weibo/cat/:slug/'
+  weibo_tags = '/weibo/tag/:slug/'
+  google_categories = '/google/cat/:slug/'
+  google_tags = '/google/tag/:slug/'
+  info_categories = '/info/cat/:slug/'
+  info_tags = '/info/tag/:slug/'
+  apps_categories = '/apps/cat/:slug/'
+  apps_tags = '/apps/tag/:slug/'
+  movie_categories = '/movie/cat/:slug/'
+  movie_tags = '/movie/tag/:slug/'
 
 [module]
   [[module.mounts]]
@@ -37,11 +41,11 @@ disablePathToLower = true
     target = 'content'
     files = ['! */categories', '! */tags']
   [[module.mounts]]
+    source = 'content/apps/categories'
+    target = 'content/apps_categories'
+  [[module.mounts]]
     source = 'content/apps/tags'
     target = 'content/apps_tags'
-  [[module.mounts]]
-    source = 'content/book/categories'
-    target = 'content/book_categories'
   [[module.mounts]]
     source = 'content/google/categories'
     target = 'content/google_categories'
@@ -52,8 +56,14 @@ disablePathToLower = true
     source = 'content/info/categories'
     target = 'content/info_categories'
   [[module.mounts]]
+    source = 'content/info/tags'
+    target = 'content/info_tags'
+  [[module.mounts]]
     source = 'content/movie/categories'
     target = 'content/movie_categories'
+  [[module.mounts]]
+    source = 'content/movie/tags'
+    target = 'content/movie_tags'
   [[module.mounts]]
     source = 'content/weibo/categories'
     target = 'content/weibo_categories'

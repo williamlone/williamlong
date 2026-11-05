@@ -5,6 +5,7 @@
 {{- $catmap := index hugo.Data.taxonomy $ctx.taxCat -}}
 {{- $pool := where site.RegularPages "Section" $ctx.realSec -}}
 <div id="sidebar" class="sidebar alpha omega">
+  {{- if not $ctx.sec }}
   <div class="sidebar-box clearfix">
     <h4>订阅博客</h4>
     <ul class="divSubscribe">
@@ -15,6 +16,7 @@
       </ul>
     </ul>
   </div>
+  {{- end }}
   <div class="sidebar-box clearfix">
     <h4>搜索</h4>
     <ul class="divSearchPanel">
@@ -46,6 +48,7 @@
       </ul>
     </ul>
   </div>
+  {{- if not $ctx.sec }}
   <div class="sidebar-box clearfix">
     <h4>网站收藏</h4>
     <ul class="divFavorites">
@@ -61,6 +64,7 @@
       </ul>
     </ul>
   </div>
+  {{- end }}
   <div class="sidebar-box clearfix">
     <h4>热文排行</h4>
     <ul class="article_hottest">
@@ -71,6 +75,33 @@
       </ul>
     </ul>
   </div>
+  {{- if $ctx.sec }}
+  {{- $tagTax := index site.Taxonomies $ctx.taxTag -}}
+  {{- $tagmap := index hugo.Data.taxonomy $ctx.taxTag -}}
+  {{- $tags := slice -}}
+  {{- $max := 0 -}}
+  {{- range $name, $slug := $tagmap }}
+    {{- $c := 0 }}{{ with index $tagTax $name }}{{ $c = .Count }}{{ end }}
+    {{- if gt $c 0 }}
+      {{- $tags = $tags | append (dict "name" $name "slug" $slug "count" $c) }}
+      {{- if gt $c $max }}{{ $max = $c }}{{ end }}
+    {{- end }}
+  {{- end }}
+  {{- $tags = sort $tags "count" "desc" -}}
+  {{- if gt (len $tags) 0 }}
+  <div class="sidebar-box clearfix">
+    <h4>标签列表</h4>
+    <ul class="divTags">
+      <ul>
+        {{- range $tags }}
+        {{- $size := add 1 (int (div (mul .count 6) $max)) }}
+        <li class="tag-name tag-name-size-{{ $size }}"><a href="{{ printf "/%s/tag/%s.html" $ctx.sec .slug | relURL }}">{{ .name }}<span class="tag-count"> ({{ .count }})</span></a></li>
+        {{- end }}
+      </ul>
+    </ul>
+  </div>
+  {{- end }}
+  {{- end }}
   <div class="sidebar-box clearfix">
     <h4>站点统计</h4>
     <ul class="divStatistics">
@@ -80,4 +111,21 @@
       </ul>
     </ul>
   </div>
+  {{- if $ctx.sec }}
+  <div class="sidebar-box clearfix">
+    <h4>网站收藏</h4>
+    <ul class="divFavorites">
+      <ul>
+        <li><a href="{{ "/" | relURL }}" target="_blank">月光博客</a></li>
+        <li><a href="{{ "/weibo/" | relURL }}" target="_blank">月光微博客</a></li>
+        <li><a href="{{ "/google/" | relURL }}" target="_blank">谷歌地图观察</a></li>
+        <li><a href="{{ "/apps/" | relURL }}" target="_blank">移动应用观察</a></li>
+        <li><a href="{{ "/info/" | relURL }}" target="_blank">网站运营优化</a></li>
+        <li><a href="{{ "/movie/" | relURL }}" target="_blank">电影评论</a></li>
+        <li><a href="{{ "/book/" | relURL }}" target="_blank">短篇小说</a></li>
+        <li><a href="{{ "/xiaoshuo/" | relURL }}" target="_blank">长篇小说</a></li>
+      </ul>
+    </ul>
+  </div>
+  {{- end }}
 </div>

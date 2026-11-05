@@ -61,13 +61,15 @@
     <div class="entry-content">暂无内容。</div>
   </div>
   {{- else }}
-  {{- $paginator := .Paginate $pages }}
+  {{- $paginator := .Paginate $pages (cond (eq $ctx.sec "") 42 40) }}
   {{- range $paginator.Pages }}
   <div class="entry clearfix">
     <h1><a class="post-title" href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a></h1>
     <div class="post-meta">
       {{ .Date.Format "2006年1月2日" }} |
+      {{- if not $ctx.sec }}
       作者: {{ .Params.author | default site.Params.author }} |
+      {{- end }}
       {{- with index .Params $ctx.catKey }}
       {{- $c := index . 0 }}
       {{- $cslug := index $catmap $c }}
@@ -76,6 +78,7 @@
     </div>
     <div class="clear"></div>
     <div class="entry-content">
+      {{- if not $ctx.sec }}
       {{- with index .Params $ctx.tagKey }}
         {{- $t := index . 0 }}
         {{- $tslug := index $tagmap $t }}
@@ -84,9 +87,21 @@
       <a href="{{ cond (eq $ctx.sec "") (printf "/tag/%s.html" $tslug) (printf "/%s/tag/%s.html" $ctx.sec $tslug) | relURL }}" rel="tag"><img src="{{ printf "/logo/%s" $logo | relURL }}" alt="{{ $t }}" class="thumb" width="80" height="80" /></a>
         {{- end }}
       {{- end }}
+      {{- end }}
       {{- if .Summary }}{{ .Summary | plainify | strings.TrimSpace | truncate 220 }}{{ else }}{{ .Content | plainify | strings.TrimSpace | truncate 220 }}{{ end }}
       {{- if $ctx.sec }}
       <a href="{{ .RelPermalink }}" class="more-link">阅读全文...</a>
+      {{- end }}
+      {{- if in (slice "google" "apps" "movie") $ctx.sec }}
+        {{- with index .Params $ctx.tagKey }}
+      <div class="post-tags-pig">
+          {{- range $t := . }}
+            {{- with index $tagmap $t }}
+        <a href="{{ printf "%s/tag/%s.html" $ctx.prefix . | relURL }}" rel="tag">{{ $t }}</a>
+            {{- end }}
+          {{- end }}
+      </div>
+        {{- end }}
       {{- end }}
     </div>
   </div>
