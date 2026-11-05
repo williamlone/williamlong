@@ -95,3 +95,7 @@ disablePathToLower = true
 
 [outputFormats.RSS]
   baseName = 'rss'
+
+[services]
+  [services.rss]
+    limit = 10
