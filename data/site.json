@@ -13,6 +13,8 @@
       {"name": "地图", "url": "/cat/map.html"},
       {"name": "观察", "url": "/google/"},
       {"name": "微博", "url": "/weibo/"},
+      {"name": "应用", "url": "/apps/"},
+      {"name": "运营", "url": "/info/"},
       {"name": "影评", "url": "/movie/"},
       {"name": "更多", "url": "/archives/"}
     ]
@@ -85,30 +87,6 @@
       {"name": "港台电影", "url": "/movie/cat/hk.html"},
       {"name": "大陆电影", "url": "/movie/cat/cn.html"},
       {"name": "更多", "url": "/movie/archives/"}
-    ]
-  },
-  "story": {
-    "title": "故事文摘",
-    "nav": [
-      {"name": "首页", "url": "/story/"},
-      {"name": "爱情故事", "url": "/story/cat/love.html"},
-      {"name": "情感故事", "url": "/story/cat/feeling.html"},
-      {"name": "人生故事", "url": "/story/cat/life.html"},
-      {"name": "幽默故事", "url": "/story/cat/joke.html"},
-      {"name": "哲理故事", "url": "/story/cat/fable.html"},
-      {"name": "科幻故事", "url": "/story/cat/mystery.html"},
-      {"name": "鬼故事", "url": "/story/cat/ghost.html"},
-      {"name": "更多", "url": "/story/archives/"}
-    ]
-  },
-  "anni": {
-    "title": "安妮宝贝",
-    "nav": [
-      {"name": "首页", "url": "/anni/"},
-      {"name": "安妮宝贝的小说", "url": "/anni/cat/novel.html"},
-      {"name": "安妮宝贝的随笔", "url": "/anni/cat/essay.html"},
-      {"name": "安妮宝贝的诗歌", "url": "/anni/cat/poem.html"},
-      {"name": "更多", "url": "/anni/archives/"}
     ]
   },
   "xiaoshuo": {

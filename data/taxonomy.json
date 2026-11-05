@@ -332,18 +332,9 @@
     "港台电影": "hk",
     "大陆电影": "cn"
   },
-  "story_categories": {
-    "爱情故事": "love",
-    "情感故事": "feeling",
-    "人生故事": "life",
-    "幽默故事": "joke",
-    "哲理故事": "fable",
-    "科幻故事": "mystery",
-    "鬼故事": "ghost"
-  },
-  "anni_categories": {
-    "安妮宝贝的小说": "novel",
-    "安妮宝贝的随笔": "essay",
-    "安妮宝贝的诗歌": "poem"
+  "apps_tags": {
+    "iPhone": "iPhone",
+    "iPad": "iPad",
+    "Android": "Android"
   }
 }
