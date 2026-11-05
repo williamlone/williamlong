@@ -1,0 +1,7 @@
+User-agent: DotBot
+Disallow:/
+User-agent: WebZip
+Disallow:/
+User-agent: NetAnts
+Disallow:/
+
