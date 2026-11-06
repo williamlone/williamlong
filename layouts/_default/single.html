@@ -47,6 +47,17 @@
     {{- end }}
     {{- end }}
 {{ .Content }}
+    {{- if not $ctx.sec }}
+    {{- with index .Params $ctx.tagKey }}
+      {{- $t := index . 0 }}
+      {{- with index $tagmap $t }}
+        {{- $jpg := index (partialCached "logoindex.html" "logo-index") (lower .) }}
+        {{- with $jpg }}
+    <div class="post-logo"><img src="{{ printf "/logo/%s" . | relURL }}" alt="{{ $t }}" style="max-width:100%;height:auto;" loading="lazy" /></div>
+        {{- end }}
+      {{- end }}
+    {{- end }}
+    {{- end }}
     {{- if $ctx.sec }}
     {{- with index .Params $ctx.tagKey }}
     <div class="post-bottom">

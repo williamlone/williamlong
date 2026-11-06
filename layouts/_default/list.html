@@ -45,7 +45,7 @@
 {{- else }}
   {{- $pages := .RegularPages -}}
   {{- if .IsHome }}{{ $pages = where site.RegularPages "Section" "archives" }}{{ end -}}
-  {{- if and (eq .Kind "section") (in (slice "apps" "info" "movie") $ctx.sec) }}{{ $pages = .RegularPagesRecursive }}{{ end -}}
+  {{- if eq .Kind "section" }}{{ $pages = .RegularPagesRecursive }}{{ end -}}
   {{- if eq .Kind "term" }}{{ $pages = .Pages }}{{ end -}}
   {{- $pages = $pages.ByDate.Reverse -}}
   {{- $catmap := index hugo.Data.taxonomy $ctx.catKey -}}

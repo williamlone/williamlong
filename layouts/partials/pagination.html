@@ -2,13 +2,22 @@
 {{- if gt $p.TotalPages 1 }}
 <div class="pagination clearfix">
   <a class="page-numbers" href="{{ replace $p.First.URL "index.html" "" }}"><span class="page first-page">&laquo;</span></a>
+  {{- $prev := 0 -}}
   {{- range $p.Pagers }}
-    {{- if eq .PageNumber $p.PageNumber }}
+    {{- $show := false -}}
+    {{- if eq .PageNumber $p.PageNumber }}{{ $show = true }}{{ end -}}
+    {{- if or (le .PageNumber 6) (ge .PageNumber (sub $p.TotalPages 2)) }}{{ $show = true }}{{ end -}}
+    {{- if and (ge .PageNumber (sub $p.PageNumber 3)) (le .PageNumber (add $p.PageNumber 3)) }}{{ $show = true }}{{ end -}}
+    {{- if $show }}
+      {{- if and (gt $prev 0) (gt .PageNumber (add $prev 1)) }}
+    <span class="page page-ellipsis" aria-hidden="true">&hellip;</span>
+      {{- end }}
+      {{- if eq .PageNumber $p.PageNumber }}
     <span class="page now-page">{{ .PageNumber }}</span>
-    {{- else if and (or (le .PageNumber 6) (ge .PageNumber (sub $p.TotalPages 2))) }}
+      {{- else }}
     <a class="page-numbers" href="{{ replace .URL "index.html" "" }}"><span class="page">{{ .PageNumber }}</span></a>
-    {{- else if and (ge .PageNumber (sub $p.PageNumber 3)) (le .PageNumber (add $p.PageNumber 3)) }}
-    <a class="page-numbers" href="{{ replace .URL "index.html" "" }}"><span class="page">{{ .PageNumber }}</span></a>
+      {{- end }}
+      {{- $prev = .PageNumber }}
     {{- end }}
   {{- end }}
   <a class="page-numbers" href="{{ replace $p.Last.URL "index.html" "" }}"><span class="page last-page">&raquo;</span></a>

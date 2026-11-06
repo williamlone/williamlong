@@ -1,0 +1,8 @@
+{{- /* 建立 static/logo 下 .jpg 文件名索引：slug 小写 -> 实际文件名（保留原始大小写） */ -}}
+{{- $idx := dict -}}
+{{- range os.ReadDir "static/logo" -}}
+  {{- if strings.HasSuffix (lower .Name) ".jpg" -}}
+    {{- $idx = merge $idx (dict (strings.TrimSuffix ".jpg" (lower .Name)) .Name) -}}
+  {{- end -}}
+{{- end -}}
+{{- return $idx -}}
